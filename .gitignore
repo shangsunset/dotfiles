@@ -1,0 +1,14 @@
+# ignore all
+*
+**/.swp
+
+# white list
+!/.gitignore
+!/.zshrc
+!/.zshenv
+!/.tmux.conf
+!/.tmux.statusbar.conf
+
+!/.ssh
+!/.config/nvim
+!/.gitconfig
