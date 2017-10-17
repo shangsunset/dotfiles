@@ -3,13 +3,28 @@
 **/.swp
 
 # white list
+
+# git
 !/.gitignore
+!/.gitconfig
+
+# vim
 !/.vimrc
+
+# zsh
 !/.zshrc
 !/.zshenv
+
+# tmux
 !/.tmux.conf
 !/.tmux.statusbar.conf
 
-!/.ssh
+!/.config
+
+# neovim
 !/.config/nvim
-!/.gitconfig
+!/.config/nvim/init.vim
+
+# fish
+!/.config/fish
+!/.config/fish/config.fish
