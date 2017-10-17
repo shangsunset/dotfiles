@@ -8,6 +8,17 @@
 !/.gitignore
 !/.gitconfig
 
+!/.setup.sh
+!/.config
+
+# neovim
+!/.config/nvim
+!/.config/nvim/init.vim
+
+# fish
+!/.config/fish
+!/.config/fish/config.fish
+
 # vim
 !/.vimrc
 
@@ -18,13 +29,3 @@
 # tmux
 !/.tmux.conf
 !/.tmux.statusbar.conf
-
-!/.config
-
-# neovim
-!/.config/nvim
-!/.config/nvim/init.vim
-
-# fish
-!/.config/fish
-!/.config/fish/config.fish
