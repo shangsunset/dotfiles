@@ -4,6 +4,7 @@ Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go'
+Plug 'jiangmiao/auto-pairs'
 Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
@@ -24,7 +25,7 @@ let mapleader="\<Space>"
 
 set clipboard+=unnamedplus
 
-set number relativenumber
+set number
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
@@ -101,3 +102,14 @@ let g:go_highlight_build_constraints = 1
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
+
+" supertab
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
+" init.vim
+map <Leader>conf :e $MYVIMRC<CR>
+map <Leader>src :source $MYVIMRC<CR>
+
+" fzf.vim
+map <Leader>f :Files<CR>
+map <Leader>b :Buffers<CR>
