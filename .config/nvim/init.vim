@@ -10,7 +10,8 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-scripts/tComment'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
@@ -88,8 +89,9 @@ vnoremap > >gv
 " Clear search highlights
 noremap <silent><Leader>/ :nohls<CR>
 
-" tComment mapping
-map <Leader>c <c-_><c-_>
+" commenting
+nmap ,, gcc
+vmap ,, gc
 
 " vim-go
 let g:go_fmt_command = "goimports"
@@ -108,7 +110,7 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " init.vim
 map <Leader>conf :e $MYVIMRC<CR>
-map <Leader>src :source $MYVIMRC<CR>
+map <Leader>sv :source $MYVIMRC<CR>
 
 " fzf.vim
 map <Leader>f :Files<CR>
