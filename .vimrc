@@ -41,7 +41,6 @@ colorscheme base16-unikitty-dark
 let mapleader="\<Space>"
 
 set number                          " show line numbers
-set lazyredraw                      " Don't redraw while executing macros (good performance config)
 set laststatus=2                    " last window always has a statusline
 set nohlsearch                      " Don't continue to highlight searched phrases.
 set incsearch                       " But do highlight as you type your search.
@@ -73,7 +72,6 @@ set noshowmode
 set nobackup
 set nowritebackup
 set noswapfile
-set lazyredraw
 set visualbell
 set timeoutlen=1000 ttimeoutlen=0
 set wildignore=*.o,*~,*.pyc,*build/*,*/coverage/*,*.bmp,*.gif,*.ico,*.jpg,*.png,*.ico,*.pdf,*.psd,node_modules/*,*/tmp/*,*.so,*.swp,*.zip
@@ -169,22 +167,6 @@ let g:neocomplcache_enable_smart_case = 1
 " Set minimum syntax keyword length.
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
-
-
-" NERDTree
-map <leader>tt :NERDTreeToggle<CR>
-let NERDTreeIgnore = ['\.pyc$', '\.o$', '\~$', '\.class$']
-
-
-if !exists('g:airline_symbols')
-  let g:airline_symbols = {}
-endif
-let g:airline_symbols.space = "\ua0"
-" let g:airline_theme='base16'
-let g:airline#extensions#tmuxline#enabled = 1
-let g:airline#extensions#tabline#enabled = 1
-" Show just the filename
-let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 " tmux
