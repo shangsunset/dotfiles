@@ -28,10 +28,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-filetype indent on
-filetype plugin on
-
-
 syntax enable             " enable syntax highlighting (previously syntax on).
 let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark
@@ -59,7 +55,6 @@ set shiftround                      " always indent/outdent to the nearest tabst
 set expandtab                       " use spaces instead of tabs
 set smarttab                        " use tabs at the start of a line, spaces elsewhere
 set nowrap                          " don't wrap text
-set lazyredraw                      " redraw only when we need to.
 set clipboard=unnamed               " make yank copy to the global system clipboard 
 set nowrap                          " don't automatically wrap on load
 set fo-=t                           " don't automatically wrap text when typing
@@ -84,9 +79,10 @@ set wildignore=*.o,*~,*.pyc,*build/*,*/coverage/*,*.bmp,*.gif,*.ico,*.jpg,*.png,
 
 autocmd FileType make setlocal noexpandtab
 autocmd FileType javascript setlocal sw=2 ts=2 sts=2
+autocmd FileType json  setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
 autocmd FileType python setlocal sw=4 ts=4 sts=4
-autocmd FileType go setlocal sw=4 ts=4 sts=4
+autocmd FileType go setlocal sw=2 ts=2 sts=2
 autocmd FileType php setlocal sw=4 ts=4 sts=4
 autocmd FileType java setlocal sw=4 ts=4 sts=4
 autocmd FileType html setlocal sw=2 ts=2 sts=2
@@ -175,9 +171,9 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 
 " " SuperTab Integration
-" set completeopt-=previewtj
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-" let g:SuperTabClosePreviewOnPopupClose = 1
+set completeopt-=previewtj
+let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 
 " tmux
