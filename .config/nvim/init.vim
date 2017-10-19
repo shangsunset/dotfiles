@@ -2,6 +2,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
+Plug 'vim-airline/vim-airline'
+Plug 'terryma/vim-multiple-cursors'
+Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go'
 Plug 'jiangmiao/auto-pairs'
@@ -59,6 +62,7 @@ set noswapfile
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
+autocmd FileType go setlocal sw=2 ts=2 sts=2
 
 
 inoremap fd <esc>
@@ -94,8 +98,8 @@ nmap ,, gcc
 vmap ,, gc
 
 " vim-go
-let g:go_fmt_command = "goimports"
-let g:go_fmt_autosave = 1
+" let g:go_fmt_command = "goimports"
+" let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
@@ -104,6 +108,15 @@ let g:go_highlight_build_constraints = 1
 au FileType go nmap <leader>r <Plug>(go-run)
 au FileType go nmap <leader>b <Plug>(go-build)
 au FileType go nmap <leader>t <Plug>(go-test)
+au FileType go nmap <leader>fm :GoFmt<cr>
+
+
+fu! Retab()
+    set expandtab
+    retab
+endfunction
+
+autocmd BufWritePre *.go ks|call Retab()
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
