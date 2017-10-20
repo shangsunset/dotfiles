@@ -27,11 +27,6 @@ call plug#end()
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 
-filetype indent on
-filetype plugin on
-
-
-
 syntax enable "enable syntax highlighting (previously syntax on).
 let base16colorspace=256  " Access colors present in 256 colorspace
 set background=dark
@@ -87,19 +82,6 @@ autocmd FileType yaml setlocal sw=2 ts=2 sts=2
 
 autocmd Filetype markdown setlocal wrap linebreak nolist
 
-
-
-" Delete trailing white space on save, useful for Python and CoffeeScript ;)
-func! DeleteTrailingWS()
-  exe "normal mz"
-  %s/\s\+$//ge
-  exe "normal `z"
-endfunc
-
-autocmd BufWrite *.py :call DeleteTrailingWS()
-autocmd BufWrite *.coffee :call DeleteTrailingWS()
-
-
 " Zoom / Restore window
 function! s:ZoomToggle() abort
   if exists('t:zoomed') && t:zoomed
@@ -124,11 +106,6 @@ autocmd BufReadPost *
       \ endif
 
 
-" Disable paste mode when leaving Insert Mode paste
-autocmd InsertLeave * set nopaste
-
-
-
 " Plugin Config
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
@@ -137,7 +114,6 @@ autocmd InsertLeave * set nopaste
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
 
 
 " CtrlP
@@ -179,23 +155,18 @@ let g:tmuxline_preset = {
       \'options' : {'status-justify' : 'left'}}
 
 
-" auto pairs
-let g:AutoPairsMapSpace = 0
-
-
 " vim-go
-" let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 0
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
-let g:go_fmt_autosave = 0
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>df <Plug>(go-def-split)
-au FileType go nmap <leader>fm :GoFmt<cr>
+au FileType go nmap <leader>gr <Plug>(go-run)
+au FileType go nmap <leader>gb <Plug>(go-build)
+au FileType go nmap <leader>gt <Plug>(go-test)
+au FileType go nmap <leader>gdf <Plug>(go-def-split)
+au FileType go nmap <leader>gfm :GoFmt<cr>
 
 
 fu! Retab()
@@ -222,16 +193,10 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " Close all the buffers
-map <leader>ba :1000 bd!<cr>
-
 map <leader>bd :bd<cr>
-map <leader>bn :bnext<cr>
-map <leader>bp :bprevious<cr>
-
 
 "select all
 map <Leader>a ggVG
-
 
 " Insert newline without entering insert mode
 nmap <S-Enter> O<Esc>
@@ -250,14 +215,6 @@ map <Leader>c <c-_><c-_>
 
 " gundo
 nnoremap <F5> :GundoToggle<CR>
-
-
-" toggle past on/off in normal mode
-nnoremap <F10> :set invpaste paste?<CR>
-
-" Quicksave command
-noremap <Leader>w :update<CR>
-vnoremap <Leader>w <C-C>:update<CR>
 
 " Set extra options when running in GUI mode
 if has("gui_running")

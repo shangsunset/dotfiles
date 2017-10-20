@@ -98,17 +98,12 @@ nmap ,, gcc
 vmap ,, gc
 
 " vim-go
-" let g:go_fmt_command = "goimports"
-" let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-au FileType go nmap <leader>r <Plug>(go-run)
-au FileType go nmap <leader>b <Plug>(go-build)
-au FileType go nmap <leader>t <Plug>(go-test)
-au FileType go nmap <leader>fm :GoFmt<cr>
+au FileType go nmap <leader>gfm :GoFmt<cr>
 
 
 fu! Retab()
@@ -126,5 +121,5 @@ map <Leader>conf :e $MYVIMRC<CR>
 map <Leader>sv :source $MYVIMRC<CR>
 
 " fzf.vim
-map <Leader>f :Files<CR>
-map <Leader>b :Buffers<CR>
+map <Leader>ff :Files<CR>
+map <Leader>fb :Buffers<CR>
