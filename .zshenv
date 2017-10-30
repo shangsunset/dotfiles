@@ -102,7 +102,7 @@ export PATH="/usr/local/opt/node@6/bin:$PATH"
 
 export PATH="$HOME/.yarn/bin:$PATH"
 
-
+export PATH="/usr/local/bin/postgres/bin:$PATH"
 
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/.go

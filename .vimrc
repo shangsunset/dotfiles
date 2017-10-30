@@ -62,7 +62,7 @@ set autoread
 set smartcase
 set wildmenu
 set ttyfast
-set mouse=a
+set mouse=
 set noshowmode
 set nobackup
 set nowritebackup

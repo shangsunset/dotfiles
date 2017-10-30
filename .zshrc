@@ -11,8 +11,4 @@ zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
 # rbenv
-# eval "$(rbenv init -)"
-
-if [[ $TERM = dumb ]]; then
-  unset zle_bracketed_paste
-fi
+eval "$(rbenv init -)"
