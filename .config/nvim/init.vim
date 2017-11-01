@@ -2,8 +2,9 @@ call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ervandew/supertab'
 Plug 'SirVer/ultisnips'
+Plug 'mileszs/ack.vim'
+Plug 'troydm/zoomwintab.vim'
 Plug 'vim-airline/vim-airline'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go'
@@ -19,7 +20,7 @@ Plug 'tpope/vim-fugitive'
 
 " Initialize plugin system
 call plug#end()
-call deoplete#enable()
+
 
 set background=dark
 let base16colorspace=256  " Access colors present in 256 colorspace
@@ -62,6 +63,7 @@ set noswapfile
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
+autocmd FileType vim  setlocal sw=2 ts=2 sts=2
 autocmd FileType go setlocal sw=2 ts=2 sts=2
 
 
@@ -78,8 +80,13 @@ map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
 
+" smooth scrolling
+map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+
 " select all
 map <Leader>a ggVG
+
 
 " Insert newline without entering insert mode
 nmap <S-Enter> O<Esc>
@@ -123,4 +130,12 @@ map <Leader>sv :source $MYVIMRC<CR>
 
 " fzf.vim
 map <Leader>ff :Files<CR>
-map <Leader>fb :Buffers<CR>
+map <Leader>bb :Buffers<CR>
+
+" deoplete
+let g:deoplete#enable_at_startup = 1
+
+" ack.vim
+if executable('ag')
+  let g:ackprg = 'ag --vimgrep'
+endif
