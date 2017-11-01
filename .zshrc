@@ -12,3 +12,5 @@ bindkey '^Z' fancy-ctrl-z
 
 # rbenv
 eval "$(rbenv init -)"
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
