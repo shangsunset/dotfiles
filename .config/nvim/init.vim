@@ -1,30 +1,32 @@
 call plug#begin('~/.config/nvim/plugged')
 
 Plug 'ervandew/supertab'
-Plug 'SirVer/ultisnips'
-Plug 'mileszs/ack.vim'
 Plug 'troydm/zoomwintab.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go'
 Plug 'jiangmiao/auto-pairs'
 Plug 'chriskempson/base16-vim'
-Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
-Plug 'tpope/vim-vinegar'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-vinegar'
+Plug 'vim-ruby/vim-ruby'
+Plug 'mileszs/ack.vim'
+Plug 'andreypopp/vim-colors-plain'
+Plug 'airblade/vim-gitgutter'
 
 " Initialize plugin system
 call plug#end()
 
+filetype indent on    " Enable filetype-specific indenting
+filetype plugin on    " Enable filetype-specific plugins
 
-set background=dark
+set background=light
 let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-unikitty-dark
+colorscheme plain
 
 let mapleader="\<Space>"
 
@@ -63,6 +65,7 @@ set noswapfile
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
+autocmd FileType ruby setlocal sw=2 ts=2 sts=2
 autocmd FileType vim  setlocal sw=2 ts=2 sts=2
 autocmd FileType go setlocal sw=2 ts=2 sts=2
 
@@ -129,8 +132,8 @@ map <Leader>conf :e $MYVIMRC<CR>
 map <Leader>sv :source $MYVIMRC<CR>
 
 " fzf.vim
-map <Leader>ff :Files<CR>
-map <Leader>bb :Buffers<CR>
+map <Leader>t :Files<CR>
+map <Leader>b :Buffers<CR>
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
