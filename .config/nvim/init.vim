@@ -1,38 +1,36 @@
 call plug#begin('~/.config/nvim/plugged')
-
 Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
-Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go'
 Plug 'jiangmiao/auto-pairs'
-Plug 'chriskempson/base16-vim'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug '/usr/local/opt/fzf'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mileszs/ack.vim'
 Plug 'andreypopp/vim-colors-plain'
-Plug 'airblade/vim-gitgutter'
-
-" Initialize plugin system
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-set background=light
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme plain
+
+if has("gui_vimr")
+  set background=light
+  color plain
+else
+  color nord
+endif
+
+
 
 let mapleader="\<Space>"
 
 set clipboard+=unnamedplus
-
-set number
 set autoindent
 set backspace=indent,eol,start
 set complete-=i
@@ -56,7 +54,6 @@ set hidden                          " A buffer becomes hidden when it is abandon
 set showmatch
 set smartcase
 set wildmenu
-set noshowmode
 set nobackup
 set nowritebackup
 set noswapfile
@@ -84,8 +81,8 @@ map <C-h> <C-W>h
 map <C-l> <C-W>l
 
 " smooth scrolling
-map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
-map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
+" map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
+" map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 
 " select all
 map <Leader>a ggVG
@@ -135,6 +132,22 @@ map <Leader>sv :source $MYVIMRC<CR>
 map <Leader>t :Files<CR>
 map <Leader>b :Buffers<CR>
 
+" Customize fzf colors to match your color scheme
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Conditional'],
+  \ 'pointer': ['fg', 'Exception'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Comment'] }
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
@@ -142,3 +155,10 @@ let g:deoplete#enable_at_startup = 1
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" set relativenumber
+" augroup numbertoggle
+"   autocmd!
+"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+" augroup END

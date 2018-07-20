@@ -3,12 +3,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'ervandew/supertab'
 Plug 'mileszs/ack.vim'
 Plug 'troydm/zoomwintab.vim'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'honza/vim-snippets'
 Plug 'fatih/vim-go'
 Plug 'jiangmiao/auto-pairs'
-Plug 'chriskempson/base16-vim'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
@@ -16,7 +13,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
-Plug 'maralla/completor.vim'
+Plug 'andreypopp/vim-colors-plain'
+
 
 " Initialize plugin system
 call plug#end()
@@ -24,9 +22,9 @@ call plug#end()
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-set background=dark
-let base16colorspace=256  " Access colors present in 256 colorspace
-colorscheme base16-ocean
+set background=light
+colorscheme plain
+
 
 let mapleader="\<Space>"
 

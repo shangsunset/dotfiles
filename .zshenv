@@ -63,6 +63,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # export LANG=en_US.UTF-8
 
 export EDITOR='nvim'
+export TERM='xterm-256color'
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -78,11 +79,12 @@ export EDITOR='nvim'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+alias vim="nvim"
 
 
 # Base16 Shell
-BASE16_SHELL=$HOME/.config/base16-shell/
-[ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
+# BASE16_SHELL=$HOME/.config/base16-shell/
+# [ -n "$PS1" ] && [ -s $BASE16_SHELL/profile_helper.sh ] && eval "$($BASE16_SHELL/profile_helper.sh)"
 
 
 # export http_proxy=localhost:8001
