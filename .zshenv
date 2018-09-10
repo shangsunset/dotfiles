@@ -118,9 +118,5 @@ fancy-ctrl-z () {
 zle -N fancy-ctrl-z
 bindkey '^Z' fancy-ctrl-z
 
-# rbenv
-export PATH="$HOME/.rbenv/bin:$PATH"
-eval "$(rbenv init -)"
-
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
