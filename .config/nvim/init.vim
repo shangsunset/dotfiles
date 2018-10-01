@@ -62,9 +62,6 @@ set noswapfile
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
-autocmd FileType ruby setlocal sw=2 ts=2 sts=2
-autocmd FileType vim  setlocal sw=2 ts=2 sts=2
-autocmd FileType go setlocal sw=2 ts=2 sts=2
 
 
 inoremap fd <esc>
@@ -73,16 +70,11 @@ inoremap fd <esc>
 nnoremap <buffer> k gk
 nnoremap <buffer> j gj
 
-" bind Ctrl+<movement> keyt to move around the windows, instead of using
-" Ctrl+w + <movement>
+" bind Ctrl+<movement> keyt to move around the windows, instead of using Ctrl+w + <movement>
 map <C-j> <C-W>j
 map <C-k> <C-W>k
 map <C-h> <C-W>h
 map <C-l> <C-W>l
-
-" smooth scrolling
-" map <C-U> <C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>
-" map <C-D> <C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>
 
 " select all
 map <Leader>a ggVG
@@ -105,28 +97,19 @@ nmap ,, gcc
 vmap ,, gc
 
 " vim-go
-let g:go_fmt_autosave = 0
+let g:go_fmt_command = "goimports"
+let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
-au FileType go nmap <leader>gfm :GoFmt<cr>
-
-
-fu! Retab()
-    set expandtab
-    retab
-endfunction
-
-autocmd BufWritePre *.go ks|call Retab()
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " init.vim
-map <Leader>conf :e $MYVIMRC<CR>
-map <Leader>sv :source $MYVIMRC<CR>
+map <Leader>rc :e $MYVIMRC<CR>
 
 " fzf.vim
 map <Leader>t :Files<CR>
@@ -155,10 +138,3 @@ let g:deoplete#enable_at_startup = 1
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
-
-" set relativenumber
-" augroup numbertoggle
-"   autocmd!
-"   autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
-"   autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
-" augroup END
