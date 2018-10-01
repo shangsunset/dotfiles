@@ -13,17 +13,11 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
-Plug 'andreypopp/vim-colors-plain'
-
-
 " Initialize plugin system
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
-
-set background=light
-colorscheme plain
 
 
 let mapleader="\<Space>"

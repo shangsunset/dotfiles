@@ -8,7 +8,6 @@
 !/.gitignore
 !/.gitconfig
 
-!/.setup.sh
 !/.config
 
 # neovim

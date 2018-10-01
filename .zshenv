@@ -15,13 +15,13 @@ ZSH_THEME=""
 # HYPHEN_INSENSITIVE="true"
 
 # Uncomment the following line to disable bi-weekly auto-update checks.
-DISABLE_AUTO_UPDATE="true"
+DISABLE_AUTO_UPDATE="false"
 
 # Uncomment the following line to change how often to auto-update (in days).
 # export UPDATE_ZSH_DAYS=13
 
 # Uncomment the following line to disable colors in ls.
-DISABLE_LS_COLORS="true"
+DISABLE_LS_COLORS="false"
 
 # Uncomment the following line to disable auto-setting terminal title.
 DISABLE_AUTO_TITLE="true"
@@ -63,7 +63,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # export LANG=en_US.UTF-8
 
 export EDITOR='nvim'
-export TERM='xterm-256color'
+export TERM=xterm-256color
 
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
@@ -79,7 +79,7 @@ export TERM='xterm-256color'
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim="nvim"
+alias vim=nvim
 
 
 # Base16 Shell
@@ -89,20 +89,13 @@ alias vim="nvim"
 
 # export http_proxy=localhost:8001
 
-# node
-export PATH="/usr/local/opt/node@6/bin:$PATH"
-
 # postgres
-export PATH="/usr/local/bin/postgres/bin:$PATH"
+# export PATH="/usr/local/bin/postgres/bin:$PATH"
 
 # go
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/.go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
-
-# pure prompt
-autoload -U promptinit; promptinit
-prompt pure
 
 
 # z jump
@@ -120,3 +113,11 @@ bindkey '^Z' fancy-ctrl-z
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# pure prompt
+autoload -U promptinit; promptinit
+# optionally define some options
+PURE_CMD_MAX_EXEC_TIME=10
+PURE_PROMPT_SYMBOL=λ
+prompt pure
+

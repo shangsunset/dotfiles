@@ -11,8 +11,8 @@ Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
 Plug 'vim-ruby/vim-ruby'
 Plug 'mileszs/ack.vim'
-Plug 'andreypopp/vim-colors-plain'
 Plug 'arcticicestudio/nord-vim'
+Plug 'andreypopp/vim-colors-plain'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
@@ -20,16 +20,16 @@ filetype plugin on    " Enable filetype-specific plugins
 
 
 if has("gui_vimr")
-  set background=light
-  color plain
+  color nord
 else
   color nord
 endif
 
 
-
 let mapleader="\<Space>"
 
+set termguicolors
+set t_Co=256
 set clipboard+=unnamedplus
 set autoindent
 set backspace=indent,eol,start
@@ -61,6 +61,7 @@ set noswapfile
 
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
+autocmd FileType vim setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
 
 
@@ -104,6 +105,7 @@ let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
 let g:go_highlight_build_constraints = 1
+let g:go_version_warning = 0
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
