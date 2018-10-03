@@ -28,8 +28,6 @@ endif
 
 let mapleader="\<Space>"
 
-set termguicolors
-set t_Co=256
 set clipboard+=unnamedplus
 set autoindent
 set backspace=indent,eol,start
