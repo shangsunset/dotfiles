@@ -1,10 +1,11 @@
 call plug#begin('~/.config/nvim/plugged')
 Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
-Plug 'fatih/vim-go'
+Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug '/usr/local/opt/fzf'
+Plug 'yssl/QFEnter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
@@ -13,6 +14,8 @@ Plug 'vim-ruby/vim-ruby'
 Plug 'mileszs/ack.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'andreypopp/vim-colors-plain'
+Plug 'mustache/vim-mustache-handlebars'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
@@ -28,16 +31,6 @@ endif
 
 let mapleader="\<Space>"
 
-set clipboard+=unnamedplus
-set autoindent
-set backspace=indent,eol,start
-set complete-=i
-set incsearch
-set laststatus=2
-set display+=lastline
-set autoread
-set viminfo^=!
-set sessionoptions-=options
 set number                          " show line numbers
 set lazyredraw                      " Don't redraw while executing macros (good performance config)
 set nohlsearch                      " Don't continue to highlight searched phrases.
@@ -49,12 +42,24 @@ set expandtab                       " use spaces instead of tabs
 set nowrap                          " don't wrap text
 set fo-=t                           " don't automatically wrap text when typing
 set hidden                          " A buffer becomes hidden when it is abandoned
+set autowrite                       " Vim has a setting called autowrite that writes the content of the file automatically if you call :make"
+set autoindent
+set updatetime=100
+set complete-=i
+set incsearch
+set laststatus=2
+set autoread
+set viminfo^=!
 set showmatch
 set smartcase
 set wildmenu
 set nobackup
 set nowritebackup
 set noswapfile
+set clipboard+=unnamedplus
+set backspace=indent,eol,start
+set sessionoptions-=options
+set display+=lastline
 
 
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
@@ -97,13 +102,26 @@ vmap ,, gc
 
 " vim-go
 let g:go_fmt_command = "goimports"
+let g:go_def_mode = 'godef'
+let g:go_list_type = "quickfix"
 let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
 let g:go_highlight_structs = 1
 let g:go_highlight_operators = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
+let g:go_highlight_extra_types = 1
 let g:go_version_warning = 0
+let g:go_metalinter_enabled = ['vet', 'errcheck']
+" let g:go_metalinter_autosave = 1
+" let g:go_auto_type_info = 1
+" let g:go_auto_sameids = 1
+
+autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
+autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
+autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -138,3 +156,9 @@ let g:deoplete#enable_at_startup = 1
 if executable('ag')
   let g:ackprg = 'ag --vimgrep'
 endif
+
+" quickfix plugin
+let g:qfenter_keymap = {}
+let g:qfenter_keymap.vopen = ['<C-v>']
+let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
+let g:qfenter_keymap.topen = ['<C-t>']
