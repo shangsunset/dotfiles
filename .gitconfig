@@ -8,3 +8,5 @@
 	required = true
 [mergetool]
 	keepBackup = false
+[alias]
+	adog = log --all --decorate --oneline --graph
