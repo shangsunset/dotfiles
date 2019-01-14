@@ -6,36 +6,28 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
 Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug '/usr/local/opt/fzf'
-" Plug 'yssl/QFEnter'
+Plug 'yssl/QFEnter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
 Plug 'mileszs/ack.vim'
-" Plug 'arcticicestudio/nord-vim'
-Plug 'andreypopp/vim-colors-plain'
-Plug 'tpope/vim-fugitive'
+Plug 'arcticicestudio/nord-vim'
 Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
 Plug 'Shougo/neosnippet'
 Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
 Plug 'terryma/vim-multiple-cursors'
-Plug 'w0rp/ale'
 Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-
-set background=dark
-color plain
-
-" if has("gui_vimr")
-"   color nord
-" else
-"   color nord
-" endif
-
+if has("gui_vimr")
+  color nord
+else
+  color nord
+endif
 
 let mapleader="\<Space>"
 
@@ -50,14 +42,11 @@ set expandtab                       " use spaces instead of tabs
 set nowrap                          " don't wrap text
 set fo-=t                           " don't automatically wrap text when typing
 set hidden                          " A buffer becomes hidden when it is abandoned
-set autowrite                       " Vim has a setting called autowrite that writes the content of the file automatically if you call :make"
+set incsearch                       " when search with /, it will move the highlight as you add characters to the search keyword
+set display+=lastline               "When included, as much as possible of the last line in a window will be displayed.  When not included, a last line that doesn't fit is replaced with "@" lines
 set autoindent
-set updatetime=100
-set complete-=i
-set incsearch
+set updatetime=250
 set laststatus=2
-set autoread
-set viminfo^=!
 set showmatch
 set smartcase
 set wildmenu
@@ -65,10 +54,12 @@ set nobackup
 set nowritebackup
 set noswapfile
 set clipboard+=unnamedplus
-set backspace=indent,eol,start
-set sessionoptions-=options
-set display+=lastline
-
+" set autowrite
+" set autoread
+" set complete-=i
+" set viminfo^=!
+" set backspace=indent,eol,start
+" set sessionoptions-=options
 
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
@@ -125,8 +116,6 @@ let g:go_version_warning = 0
 let g:go_auto_type_info = 1
 let g:go_metalinter_enabled = ['vet', 'errcheck']
 " let g:go_metalinter_autosave = 1
-" let g:go_auto_type_info = 1
-" let g:go_auto_sameids = 1
 
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
@@ -139,8 +128,8 @@ let g:SuperTabDefaultCompletionType = "<c-n>"
 map <Leader>rc :e $MYVIMRC<CR>
 
 " fzf.vim
-map <Leader>t :Files<CR>
-map <Leader>b :Buffers<CR>
+map <Leader>ff :Files<CR>
+map <Leader>bb :Buffers<CR>
 
 " Customize fzf colors to match your color scheme
 let g:fzf_colors =

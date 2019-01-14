@@ -10,3 +10,6 @@
 	keepBackup = false
 [alias]
 	adog = log --all --decorate --oneline --graph
+        s = status
+        c = commit -m
+        a = add .
