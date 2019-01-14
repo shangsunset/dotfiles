@@ -4,29 +4,37 @@ Plug 'troydm/zoomwintab.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug '/usr/local/opt/fzf'
-Plug 'yssl/QFEnter'
+" Plug 'yssl/QFEnter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-vinegar'
-Plug 'vim-ruby/vim-ruby'
 Plug 'mileszs/ack.vim'
-Plug 'arcticicestudio/nord-vim'
+" Plug 'arcticicestudio/nord-vim'
 Plug 'andreypopp/vim-colors-plain'
-Plug 'mustache/vim-mustache-handlebars'
 Plug 'tpope/vim-fugitive'
+Plug 'Shougo/neocomplcache'        " Depenency for Shougo/neosnippet
+Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet-snippets'  " Default snippets for many languages
+Plug 'terryma/vim-multiple-cursors'
+Plug 'w0rp/ale'
+Plug 'airblade/vim-gitgutter'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 
-if has("gui_vimr")
-  color nord
-else
-  color nord
-endif
+set background=dark
+color plain
+
+" if has("gui_vimr")
+"   color nord
+" else
+"   color nord
+" endif
 
 
 let mapleader="\<Space>"
@@ -114,6 +122,7 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_version_warning = 0
+let g:go_auto_type_info = 1
 let g:go_metalinter_enabled = ['vet', 'errcheck']
 " let g:go_metalinter_autosave = 1
 " let g:go_auto_type_info = 1
@@ -162,3 +171,16 @@ let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
+
+
+" Disable deoplete when in multi cursor mode
+function! Multiple_cursors_before()
+    let b:deoplete_disable_auto_complete = 1
+endfunction
+
+function! Multiple_cursors_after()
+    let b:deoplete_disable_auto_complete = 0
+endfunction
+
+" neosnippet
+let g:go_snippet_engine = "neosnippet"
