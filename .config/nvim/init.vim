@@ -15,10 +15,23 @@ Plug 'mileszs/ack.vim'
 Plug 'arcticicestudio/nord-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'airblade/vim-gitgutter'
+Plug 'itchyny/lightline.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
+
+let g:lightline = {
+      \ 'colorscheme': 'nord',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'fugitive#head'
+      \ },
+      \ }
 
 if has("gui_vimr")
   color nord
