@@ -2,28 +2,29 @@ call plug#begin('~/.config/nvim/plugged')
 Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'zchee/deoplete-go', { 'do': 'make'}
 Plug '/usr/local/opt/fzf'
 Plug 'yssl/QFEnter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-vinegar'
-Plug 'mileszs/ack.vim'
-Plug 'arcticicestudio/nord-vim'
-Plug 'terryma/vim-multiple-cursors'
+Plug 'tpope/vim-fugitive'
+" Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
-Plug 'tpope/vim-fugitive'
+
+Plug 'tyrannicaltoucan/vim-deep-space'
+Plug 'arcticicestudio/nord-vim'
+Plug 'whatyouhide/vim-gotham'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 let g:lightline = {
-      \ 'colorscheme': 'nord',
+      \ 'colorscheme': 'gotham',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -33,11 +34,10 @@ let g:lightline = {
       \ },
       \ }
 
-if has("gui_vimr")
-  color nord
-else
-  color nord
-endif
+
+set background=dark
+set termguicolors
+colorscheme gotham
 
 let mapleader="\<Space>"
 
@@ -124,15 +124,19 @@ let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_version_warning = 0
 let g:go_metalinter_enabled = ['vet', 'errcheck']
-" let g:go_metalinter_autosave = 1
-" let g:go_auto_type_info = 1
+let g:go_auto_type_info = 1
 
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang R :GoReferrers
 autocmd Filetype go command! -bang T :GoTest
-autocmd Filetype go command! -bang I :GoInfo
+autocmd Filetype go command! -bang D :GoDoc
+
+" netrw
+let g:netrw_banner = 0
+map <Leader>nn :Explore<CR>
+map <Leader>vn :Vexplore<CR>
 
 " supertab
 let g:SuperTabDefaultCompletionType = "<c-n>"
@@ -144,42 +148,20 @@ map <Leader>rc :e $MYVIMRC<CR>
 map <Leader>t :Files<CR>
 map <Leader>b :Buffers<CR>
 
-" Customize fzf colors to match your color scheme
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
-  \ 'bg':      ['bg', 'Normal'],
-  \ 'hl':      ['fg', 'Comment'],
-  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
-  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn'],
-  \ 'hl+':     ['fg', 'Statement'],
-  \ 'info':    ['fg', 'PreProc'],
-  \ 'border':  ['fg', 'Ignore'],
-  \ 'prompt':  ['fg', 'Conditional'],
-  \ 'pointer': ['fg', 'Exception'],
-  \ 'marker':  ['fg', 'Keyword'],
-  \ 'spinner': ['fg', 'Label'],
-  \ 'header':  ['fg', 'Comment'] }
+autocmd! FileType fzf
+autocmd  FileType fzf set laststatus=0 noshowmode noruler
+  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
 " deoplete
 let g:deoplete#enable_at_startup = 1
 
 " ack.vim
-if executable('ag')
-  let g:ackprg = 'ag --vimgrep'
-endif
+" if executable('ag')
+"   let g:ackprg = 'ag --vimgrep'
+" endif
 
 " quickfix plugin
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
-
-
-" Disable deoplete when in multi cursor mode
-function! Multiple_cursors_before()
-    let b:deoplete_disable_auto_complete = 1
-endfunction
-
-function! Multiple_cursors_after()
-    let b:deoplete_disable_auto_complete = 0
-endfunction

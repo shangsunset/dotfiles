@@ -37,8 +37,8 @@ values."
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
      ivy
+     osx
      auto-completion
-     ;; better-defaults
      emacs-lisp
      evil-commentary
      git
@@ -51,7 +51,6 @@ values."
      syntax-checking
      version-control
      (go :variables
-         go-use-gometalinter t
          gofmt-command "goimports")
      )
    ;; List of additional packages that will be installed without being
@@ -316,7 +315,7 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
   (setq truncate-lines t)
-  (setq flycheck-gometalinter-errors-only t)
+  ;; (setq flycheck-gometalinter-errors-only t)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -327,7 +326,8 @@ you should place your code here."
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(wgrep powerline smex smeargle ranger spinner orgit magit-gitflow ivy-hydra hydra parent-mode helm helm-core go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flycheck-pos-tip pos-tip flycheck-gometalinter flycheck flx highlight evil-magit magit magit-popup git-commit with-editor smartparens iedit evil-commentary anzu evil goto-chg undo-tree f dash s counsel-projectile projectile pkg-info epl counsel swiper company-go go-mode bind-map bind-key auto-yasnippet packed async avy ac-ispell auto-complete popup company ivy yasnippet ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line)))
+   (quote
+    (reveal-in-osx-finder pbcopy osx-trash osx-dictionary launchctl wgrep powerline smex smeargle ranger spinner orgit magit-gitflow ivy-hydra hydra parent-mode helm helm-core go-guru go-eldoc gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter fuzzy flycheck-pos-tip pos-tip flycheck-gometalinter flycheck flx highlight evil-magit magit magit-popup git-commit with-editor smartparens iedit evil-commentary anzu evil goto-chg undo-tree f dash s counsel-projectile projectile pkg-info epl counsel swiper company-go go-mode bind-map bind-key auto-yasnippet packed async avy ac-ispell auto-complete popup company ivy yasnippet ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete hl-todo highlight-parentheses highlight-numbers highlight-indentation helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu elisp-slime-nav dumb-jump diminish diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-highlight-symbol auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
