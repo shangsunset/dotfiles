@@ -11,7 +11,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
-" Plug 'mileszs/ack.vim'
 Plug 'airblade/vim-gitgutter'
 Plug 'itchyny/lightline.vim'
 
@@ -24,7 +23,7 @@ filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
 let g:lightline = {
-      \ 'colorscheme': 'gotham',
+      \ 'colorscheme': 'deepspace',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -37,7 +36,8 @@ let g:lightline = {
 
 set background=dark
 set termguicolors
-colorscheme gotham
+let g:deepspace_italics=1
+colorscheme deep-space
 
 let mapleader="\<Space>"
 
@@ -47,7 +47,8 @@ set nohlsearch                      " Don't continue to highlight searched phras
 set hlsearch                        " Highlight search results
 set magic                           " For regular expressions turn magic on
 set smartindent                     " automatically insert one extra level of indentation
-set splitright                      " To make vsplit put the new buffer on the right of the current buffer
+" set splitright                      " To make vsplit put the new buffer on the right of the current buffer
+set splitbelow
 set expandtab                       " use spaces instead of tabs
 set nowrap                          " don't wrap text
 set fo-=t                           " don't automatically wrap text when typing
@@ -59,6 +60,8 @@ set updatetime=250
 set laststatus=2
 set showmatch
 set smartcase
+set linespace=3
+set cursorline
 set wildmenu
 set nobackup
 set nowritebackup
@@ -148,17 +151,25 @@ map <Leader>rc :e $MYVIMRC<CR>
 map <Leader>t :Files<CR>
 map <Leader>b :Buffers<CR>
 
+" hide status line
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
+"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+"   :Ag! - Start fzf in fullscreen and display the preview window above
+command! -bang -nargs=* Ag
+  \ call fzf#vim#ag(<q-args>,
+  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
+  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \                 <bang>0)
+
+" Likewise, Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 " deoplete
 let g:deoplete#enable_at_startup = 1
-
-" ack.vim
-" if executable('ag')
-"   let g:ackprg = 'ag --vimgrep'
-" endif
 
 " quickfix plugin
 let g:qfenter_keymap = {}
