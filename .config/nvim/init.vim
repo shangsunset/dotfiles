@@ -12,8 +12,9 @@ Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 
+Plug 'morhetz/gruvbox'
 Plug 'tyrannicaltoucan/vim-deep-space'
 Plug 'arcticicestudio/nord-vim'
 Plug 'whatyouhide/vim-gotham'
@@ -22,24 +23,40 @@ call plug#end()
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
-let g:lightline = {
-      \ 'colorscheme': 'deepspace',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'fugitive#head'
-      \ },
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'deepspace',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'fugitive#head'
+"       \ },
+"       \ }
 
 
 set background=dark
 set termguicolors
-let g:deepspace_italics=1
-colorscheme deep-space
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
+colorscheme gruvbox
 
 let mapleader="\<Space>"
+
+" gruvbox
+hi vertsplit ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1c1c1c
+hi LineNr ctermfg=237 guifg=#3a3a3a
+hi StatusLine ctermfg=234 ctermbg=245 guifg=#1c1c1c guibg=#8a8a8a
+hi StatusLineNC ctermfg=234 ctermbg=237 guifg=#1c1c1c guibg=#3a3a3a
+hi Search ctermbg=58 ctermfg=15 guibg=#5f5f00
+hi Default ctermfg=1
+hi clear SignColumn
+hi SignColumn ctermbg=234
+hi GitGutterAdd ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
+hi GitGutterChange ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
+hi GitGutterDelete ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
+hi GitGutterChangeDelete ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
+hi EndOfBuffer ctermfg=237 ctermbg=234 guifg=#3a3a3a guibg=#1c1c1c
 
 set number                          " show line numbers
 set lazyredraw                      " Don't redraw while executing macros (good performance config)
@@ -47,8 +64,7 @@ set nohlsearch                      " Don't continue to highlight searched phras
 set hlsearch                        " Highlight search results
 set magic                           " For regular expressions turn magic on
 set smartindent                     " automatically insert one extra level of indentation
-" set splitright                      " To make vsplit put the new buffer on the right of the current buffer
-set splitbelow
+set splitright                      " To make vsplit put the new buffer on the right of the current buffer
 set expandtab                       " use spaces instead of tabs
 set nowrap                          " don't wrap text
 set fo-=t                           " don't automatically wrap text when typing
@@ -56,12 +72,12 @@ set hidden                          " A buffer becomes hidden when it is abandon
 set incsearch                       " when search with /, it will move the highlight as you add characters to the search keyword
 set display+=lastline               " When included, as much as possible of the last line in a window will be displayed.  When not included, a last line that doesn't fit is replaced with "@" lines
 set autoindent
+set noshowmode
 set updatetime=250
 set laststatus=2
 set showmatch
 set smartcase
 set linespace=3
-set cursorline
 set wildmenu
 set nobackup
 set nowritebackup
@@ -156,8 +172,8 @@ autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-"   :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-"   :Ag! - Start fzf in fullscreen and display the preview window above
+" :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
+" :Ag! - Start fzf in fullscreen and display the preview window above
 command! -bang -nargs=* Ag
   \ call fzf#vim#ag(<q-args>,
   \                 <bang>0 ? fzf#vim#with_preview('up:60%')
@@ -173,6 +189,9 @@ let g:deoplete#enable_at_startup = 1
 
 " quickfix plugin
 let g:qfenter_keymap = {}
+let g:qfenter_keymap.open = ['<CR>']
 let g:qfenter_keymap.vopen = ['<C-v>']
 let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
+" move the quickfix window to the bottom of the window layout
+autocmd FileType qf wincmd J
