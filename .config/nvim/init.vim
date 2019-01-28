@@ -44,19 +44,19 @@ colorscheme gruvbox
 let mapleader="\<Space>"
 
 " gruvbox
-hi vertsplit ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1c1c1c
+hi vertsplit ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1d2021
 hi LineNr ctermfg=237 guifg=#3a3a3a
-hi StatusLine ctermfg=234 ctermbg=245 guifg=#1c1c1c guibg=#8a8a8a
-hi StatusLineNC ctermfg=234 ctermbg=237 guifg=#1c1c1c guibg=#3a3a3a
+hi StatusLine ctermfg=234 ctermbg=245 guifg=#1d2021 guibg=#8a8a8a
+hi StatusLineNC ctermfg=234 ctermbg=237 guifg=#1d2021 guibg=#3a3a3a
 hi Search ctermbg=58 ctermfg=15 guibg=#5f5f00
 hi Default ctermfg=1
 hi clear SignColumn
 hi SignColumn ctermbg=234
-hi GitGutterAdd ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
-hi GitGutterChange ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
-hi GitGutterDelete ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
-hi GitGutterChangeDelete ctermbg=234 ctermfg=245 guibg=#1c1c1c guifg=#8a8a8a
-hi EndOfBuffer ctermfg=237 ctermbg=234 guifg=#3a3a3a guibg=#1c1c1c
+hi GitGutterAdd ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+hi GitGutterChange ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+hi GitGutterDelete ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+hi GitGutterChangeDelete ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+hi EndOfBuffer ctermfg=237 ctermbg=234 guifg=#3a3a3a guibg=#1d2021
 
 set number                          " show line numbers
 set lazyredraw                      " Don't redraw while executing macros (good performance config)
@@ -72,7 +72,6 @@ set hidden                          " A buffer becomes hidden when it is abandon
 set incsearch                       " when search with /, it will move the highlight as you add characters to the search keyword
 set display+=lastline               " When included, as much as possible of the last line in a window will be displayed.  When not included, a last line that doesn't fit is replaced with "@" lines
 set autoindent
-set noshowmode
 set updatetime=250
 set laststatus=2
 set showmatch
@@ -151,6 +150,7 @@ autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
 autocmd Filetype go command! -bang R :GoReferrers
 autocmd Filetype go command! -bang T :GoTest
 autocmd Filetype go command! -bang D :GoDoc
+autocmd Filetype go command! -bang O :GoInfo
 
 " netrw
 let g:netrw_banner = 0
