@@ -62,7 +62,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='nvim'
+export EDITOR='vim'
 export TERM=xterm-256color
 
 # Compilation flags
@@ -79,7 +79,6 @@ export TERM=xterm-256color
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-alias vim=nvim
 alias k=kubectl
 
 
@@ -97,6 +96,8 @@ export PATH="/usr/local/opt/node@6/bin:$PATH"
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+
+export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
 
 # z jump

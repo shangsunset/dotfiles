@@ -1,6 +1,6 @@
 [user]
 	email = shangsunset@gmail.com
-	name = Yeshen
+	name = Yeshen Shang
 [filter "lfs"]
 	clean = git-lfs clean -- %f
 	smudge = git-lfs smudge -- %f

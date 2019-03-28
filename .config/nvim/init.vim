@@ -1,39 +1,28 @@
 call plug#begin('~/.config/nvim/plugged')
-Plug 'ervandew/supertab'
+" Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
-Plug 'SirVer/ultisnips'
 Plug 'jiangmiao/auto-pairs'
-Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'SirVer/ultisnips'
+" Plug 'honza/vim-snippets'
 Plug '/usr/local/opt/fzf'
 Plug 'yssl/QFEnter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-" Plug 'itchyny/lightline.vim'
+" Plug 'tpope/vim-fugitive'
+" Plug 'airblade/vim-gitgutter'
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 
 Plug 'morhetz/gruvbox'
-Plug 'tyrannicaltoucan/vim-deep-space'
-Plug 'arcticicestudio/nord-vim'
-Plug 'whatyouhide/vim-gotham'
+" Plug 'tyrannicaltoucan/vim-deep-space'
+" Plug 'arcticicestudio/nord-vim'
+" Plug 'whatyouhide/vim-gotham'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
-
-" let g:lightline = {
-"       \ 'colorscheme': 'deepspace',
-"       \ 'active': {
-"       \   'left': [ [ 'mode', 'paste' ],
-"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-"       \ },
-"       \ 'component_function': {
-"       \   'gitbranch': 'fugitive#head'
-"       \ },
-"       \ }
-
 
 set background=dark
 set termguicolors
@@ -71,6 +60,8 @@ set fo-=t                           " don't automatically wrap text when typing
 set hidden                          " A buffer becomes hidden when it is abandoned
 set incsearch                       " when search with /, it will move the highlight as you add characters to the search keyword
 set display+=lastline               " When included, as much as possible of the last line in a window will be displayed.  When not included, a last line that doesn't fit is replaced with "@" lines
+set lazyredraw
+set regexpengine=1
 set autoindent
 set updatetime=250
 set laststatus=2
@@ -158,7 +149,7 @@ map <Leader>nn :Explore<CR>
 map <Leader>vn :Vexplore<CR>
 
 " supertab
-let g:SuperTabDefaultCompletionType = "<c-n>"
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
 " init.vim
 map <Leader>rc :e $MYVIMRC<CR>
@@ -195,3 +186,33 @@ let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
 let g:qfenter_keymap.topen = ['<C-t>']
 " move the quickfix window to the bottom of the window layout
 autocmd FileType qf wincmd J
+
+
+" if hidden not set, TextEdit might fail.
+" set hidden
+
+set splitbelow
+set completeopt-=preview "dont show preview window
+
+" Better display for messages
+" set cmdheight=2
+
+" Smaller updatetime for CursorHold & CursorHoldI
+" set updatetime=300
+
+" don't give |ins-completion-menu| messages.
+" set shortmess+=c
+
+" always show signcolumns
+set signcolumn=yes
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
