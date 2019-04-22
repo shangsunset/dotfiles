@@ -14,6 +14,7 @@ Plug 'tpope/vim-commentary'
 " Plug 'tpope/vim-fugitive'
 " Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'sebdah/vim-delve'
 
 Plug 'morhetz/gruvbox'
 " Plug 'tyrannicaltoucan/vim-deep-space'
@@ -24,9 +25,21 @@ call plug#end()
 filetype indent on    " Enable filetype-specific indenting
 filetype plugin on    " Enable filetype-specific plugins
 
+" Set extra options when running in GUI mode
+if has("gui_vimr")
+  " set guioptions-=T
+  " set guioptions+=e
+  " set guitablabel=%M\ %t
+  " set macligatures
+  " set guifont=Iosevka:h13
+  " set guicursor+=a:blinkon0
+  set guioptions=
+
+  let g:gruvbox_italic=1
+endif
+
 set background=dark
 set termguicolors
-let g:gruvbox_italic=1
 let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
@@ -132,7 +145,7 @@ let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
 let g:go_version_warning = 0
-let g:go_metalinter_enabled = ['vet', 'errcheck']
+let g:go_metalinter_enabled = ['golangci-lint', 'vet', 'errcheck']
 let g:go_auto_type_info = 1
 
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
@@ -142,6 +155,7 @@ autocmd Filetype go command! -bang R :GoReferrers
 autocmd Filetype go command! -bang T :GoTest
 autocmd Filetype go command! -bang D :GoDoc
 autocmd Filetype go command! -bang O :GoInfo
+autocmd Filetype go command! -bang C :GoCallees
 
 " netrw
 let g:netrw_banner = 0
@@ -204,7 +218,7 @@ set completeopt-=preview "dont show preview window
 " set shortmess+=c
 
 " always show signcolumns
-set signcolumn=yes
+" set signcolumn=yes
 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
