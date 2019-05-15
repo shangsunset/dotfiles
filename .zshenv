@@ -62,7 +62,7 @@ export MANPATH="/usr/local/man:$MANPATH"
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
 
-export EDITOR='vim'
+export EDITOR='nvim'
 export TERM=xterm-256color
 
 # Compilation flags

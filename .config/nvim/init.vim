@@ -1,25 +1,18 @@
 call plug#begin('~/.config/nvim/plugged')
-" Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'jiangmiao/auto-pairs'
-" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-" Plug 'SirVer/ultisnips'
-" Plug 'honza/vim-snippets'
 Plug '/usr/local/opt/fzf'
 Plug 'yssl/QFEnter'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-" Plug 'tpope/vim-fugitive'
-" Plug 'airblade/vim-gitgutter'
 Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'sebdah/vim-delve'
 
 Plug 'morhetz/gruvbox'
 " Plug 'tyrannicaltoucan/vim-deep-space'
 " Plug 'arcticicestudio/nord-vim'
-" Plug 'whatyouhide/vim-gotham'
 call plug#end()
 
 filetype indent on    " Enable filetype-specific indenting
@@ -27,14 +20,7 @@ filetype plugin on    " Enable filetype-specific plugins
 
 " Set extra options when running in GUI mode
 if has("gui_vimr")
-  " set guioptions-=T
-  " set guioptions+=e
-  " set guitablabel=%M\ %t
-  " set macligatures
-  " set guifont=Iosevka:h13
-  " set guicursor+=a:blinkon0
   set guioptions=
-
   let g:gruvbox_italic=1
 endif
 
@@ -132,8 +118,10 @@ nmap ,, gcc
 vmap ,, gc
 
 " vim-go
+let g:go_def_mapping_enabled = 0
 let g:go_fmt_command = "goimports"
-let g:go_def_mode = 'godef'
+" let g:go_def_mode = "gopls"
+" let g:go_info_mode = "gopls"
 let g:go_list_type = "quickfix"
 let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
@@ -144,35 +132,28 @@ let g:go_highlight_fields = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
-let g:go_version_warning = 0
-let g:go_metalinter_enabled = ['golangci-lint', 'vet', 'errcheck']
-let g:go_auto_type_info = 1
+" let g:go_version_warning = 0
+" let g:go_metalinter_enabled = ['golangci-lint']
 
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-autocmd Filetype go command! -bang R :GoReferrers
+" autocmd Filetype go command! -bang R :GoReferrers
 autocmd Filetype go command! -bang T :GoTest
-autocmd Filetype go command! -bang D :GoDoc
-autocmd Filetype go command! -bang O :GoInfo
-autocmd Filetype go command! -bang C :GoCallees
+autocmd Filetype go command! -bang R :GoRun
+" autocmd Filetype go command! -bang D :GoDoc
+" autocmd Filetype go command! -bang O :GoInfo
+" autocmd Filetype go command! -bang C :GoCallees
 
 " netrw
 let g:netrw_banner = 0
 map <Leader>nn :Explore<CR>
 map <Leader>vn :Vexplore<CR>
 
-" supertab
-" let g:SuperTabDefaultCompletionType = "<c-n>"
-
-" init.vim
-map <Leader>rc :e $MYVIMRC<CR>
-
 " fzf.vim
 map <Leader>t :Files<CR>
 map <Leader>b :Buffers<CR>
 
-" hide status line
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
@@ -189,9 +170,6 @@ command! -bang -nargs=* Ag
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-" deoplete
-let g:deoplete#enable_at_startup = 1
-
 " quickfix plugin
 let g:qfenter_keymap = {}
 let g:qfenter_keymap.open = ['<CR>']
@@ -201,25 +179,23 @@ let g:qfenter_keymap.topen = ['<C-t>']
 " move the quickfix window to the bottom of the window layout
 autocmd FileType qf wincmd J
 
+" -------------------------------------------------------------------------------------------------
+" coc.nvim default settings
+" -------------------------------------------------------------------------------------------------
 
-" if hidden not set, TextEdit might fail.
-" set hidden
-
-set splitbelow
-set completeopt-=preview "dont show preview window
-
+" if hidden is not set, TextEdit might fail.
+set hidden
 " Better display for messages
-" set cmdheight=2
-
+set cmdheight=2
 " Smaller updatetime for CursorHold & CursorHoldI
-" set updatetime=300
-
+set updatetime=300
 " don't give |ins-completion-menu| messages.
-" set shortmess+=c
-
+set shortmess+=c
 " always show signcolumns
-" set signcolumn=yes
+set signcolumn=yes
 
+" Use tab for trigger completion with characters ahead and navigate.
+" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -230,3 +206,30 @@ function! s:check_back_space() abort
   let col = col('.') - 1
   return !col || getline('.')[col - 1]  =~# '\s'
 endfunction
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocActionAsync('doHover')
+  endif
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Use `[c` and `]c` to navigate diagnostics
+nmap <silent> [c <Plug>(coc-diagnostic-prev)
+nmap <silent> ]c <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use U to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
