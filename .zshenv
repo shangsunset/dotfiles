@@ -115,6 +115,7 @@ bindkey '^Z' fancy-ctrl-z
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore-vcs --hidden'
 
 # pure prompt
 autoload -U promptinit; promptinit

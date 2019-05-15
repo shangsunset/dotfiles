@@ -151,20 +151,21 @@ map <Leader>nn :Explore<CR>
 map <Leader>vn :Vexplore<CR>
 
 " fzf.vim
-map <Leader>t :Files<CR>
-map <Leader>b :Buffers<CR>
+nnoremap <Leader>f :Files<CR>
+nnoremap <Leader>b :Buffers<CR>
+nnoremap <Leader>g :Rg<CR>
 
 autocmd! FileType fzf
 autocmd  FileType fzf set laststatus=0 noshowmode noruler
   \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
 
-" :Ag  - Start fzf with hidden preview window that can be enabled with "?" key
-" :Ag! - Start fzf in fullscreen and display the preview window above
-command! -bang -nargs=* Ag
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \                 <bang>0)
+" preview window
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
 
 " Likewise, Files command with preview window
 command! -bang -nargs=? -complete=dir Files
@@ -215,20 +216,13 @@ function! s:show_documentation()
   endif
 endfunction
 
-" Use <c-space> to trigger completion.
-inoremap <silent><expr> <c-space> coc#refresh()
-
-" Use `[c` and `]c` to navigate diagnostics
-nmap <silent> [c <Plug>(coc-diagnostic-prev)
-nmap <silent> ]c <Plug>(coc-diagnostic-next)
-
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 
-" Use U to show documentation in preview window
+" Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
 
 " Remap for rename current word
