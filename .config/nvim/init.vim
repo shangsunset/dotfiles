@@ -151,6 +151,7 @@ map <Leader>nn :Explore<CR>
 map <Leader>vn :Vexplore<CR>
 
 " fzf.vim
+let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
 nnoremap <Leader>f :Files<CR>
 nnoremap <Leader>b :Buffers<CR>
 nnoremap <Leader>g :Rg<CR>
