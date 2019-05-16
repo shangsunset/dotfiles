@@ -1,14 +1,19 @@
 call plug#begin('~/.config/nvim/plugged')
+" Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
 Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
 Plug 'jiangmiao/auto-pairs'
 Plug '/usr/local/opt/fzf'
 Plug 'yssl/QFEnter'
+Plug 'tpope/vim-fugitive'
+Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'sebdah/vim-delve'
+Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+Plug 'ryanoasis/vim-devicons'
 
 Plug 'morhetz/gruvbox'
 " Plug 'tyrannicaltoucan/vim-deep-space'
@@ -32,13 +37,13 @@ colorscheme gruvbox
 let mapleader="\<Space>"
 
 " gruvbox
+hi clear SignColumn
 hi vertsplit ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1d2021
 hi LineNr ctermfg=237 guifg=#3a3a3a
 hi StatusLine ctermfg=234 ctermbg=245 guifg=#1d2021 guibg=#8a8a8a
 hi StatusLineNC ctermfg=234 ctermbg=237 guifg=#1d2021 guibg=#3a3a3a
 hi Search ctermbg=58 ctermfg=15 guibg=#5f5f00
 hi Default ctermfg=1
-hi clear SignColumn
 hi SignColumn ctermbg=234
 hi GitGutterAdd ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
 hi GitGutterChange ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
@@ -59,6 +64,7 @@ set fo-=t                           " don't automatically wrap text when typing
 set hidden                          " A buffer becomes hidden when it is abandoned
 set incsearch                       " when search with /, it will move the highlight as you add characters to the search keyword
 set display+=lastline               " When included, as much as possible of the last line in a window will be displayed.  When not included, a last line that doesn't fit is replaced with "@" lines
+set completeopt-=preview            " No preview window
 set lazyredraw
 set regexpengine=1
 set autoindent
@@ -72,6 +78,7 @@ set nobackup
 set nowritebackup
 set noswapfile
 set clipboard+=unnamedplus
+set encoding=UTF-8
 " set autowrite
 " set autoread
 " set complete-=i
@@ -123,6 +130,7 @@ let g:go_fmt_command = "goimports"
 " let g:go_def_mode = "gopls"
 " let g:go_info_mode = "gopls"
 let g:go_list_type = "quickfix"
+" let g:go_auto_type_info = 1
 let g:go_fmt_autosave = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_methods = 1
@@ -132,23 +140,17 @@ let g:go_highlight_fields = 1
 let g:go_highlight_function_calls = 1
 let g:go_highlight_build_constraints = 1
 let g:go_highlight_extra_types = 1
-" let g:go_version_warning = 0
 " let g:go_metalinter_enabled = ['golangci-lint']
 
 autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
 autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
 autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-" autocmd Filetype go command! -bang R :GoReferrers
+autocmd Filetype go command! -bang R :GoReferrers
 autocmd Filetype go command! -bang T :GoTest
-autocmd Filetype go command! -bang R :GoRun
-" autocmd Filetype go command! -bang D :GoDoc
-" autocmd Filetype go command! -bang O :GoInfo
-" autocmd Filetype go command! -bang C :GoCallees
-
-" netrw
-let g:netrw_banner = 0
-map <Leader>nn :Explore<CR>
-map <Leader>vn :Vexplore<CR>
+autocmd Filetype go command! -bang B :GoBuild
+autocmd Filetype go command! -bang D :GoDoc
+autocmd Filetype go command! -bang L :GoLint
+autocmd Filetype go command! -bang C :GoCallees
 
 " fzf.vim
 let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
@@ -181,41 +183,23 @@ let g:qfenter_keymap.topen = ['<C-t>']
 " move the quickfix window to the bottom of the window layout
 autocmd FileType qf wincmd J
 
-" -------------------------------------------------------------------------------------------------
-" coc.nvim default settings
-" -------------------------------------------------------------------------------------------------
+nnoremap <C-g> :NERDTreeToggle %<CR>
+nnoremap <leader>nn :Explore<CR>
 
-" if hidden is not set, TextEdit might fail.
-set hidden
-" Better display for messages
-set cmdheight=2
-" Smaller updatetime for CursorHold & CursorHoldI
-set updatetime=300
-" don't give |ins-completion-menu| messages.
-set shortmess+=c
-" always show signcolumns
-set signcolumn=yes
+" let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" Use tab for trigger completion with characters ahead and navigate.
-" Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
+" use <tab> for trigger completion and navigate to the next complete item
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~ '\s'
+endfunction
+
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
       \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocActionAsync('doHover')
-  endif
-endfunction
+inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
+inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " Remap keys for gotos
 nmap <silent> gd <Plug>(coc-definition)
@@ -225,6 +209,17 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " Remap for rename current word
 nmap <leader>rn <Plug>(coc-rename)
