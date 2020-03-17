@@ -135,7 +135,6 @@ export PATH="$PATH:$JAVA_HOME"
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-source ~/.bouncex
 
 # fancy-ctrl-z () {
 #   if [[ $#BUFFER -eq 0 ]]; then
@@ -156,3 +155,6 @@ if [ -f '/Users/yeshenshang/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yes
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/yeshenshang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yeshenshang/google-cloud-sdk/completion.zsh.inc'; fi
+
+
+source ~/.bouncex
