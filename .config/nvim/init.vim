@@ -1,55 +1,45 @@
 call plug#begin('~/.config/nvim/plugged')
-" Plug 'ervandew/supertab'
 Plug 'troydm/zoomwintab.vim'
-Plug 'fatih/vim-go', { 'do': ':GoInstallBinaries' }
+Plug 'itchyny/lightline.vim'
 Plug 'jiangmiao/auto-pairs'
 Plug '/usr/local/opt/fzf'
-Plug 'yssl/QFEnter'
+" Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+" Plug 'yssl/QFEnter'
 Plug 'tpope/vim-fugitive'
 Plug 'scrooloose/nerdtree'
 Plug 'junegunn/fzf.vim'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-commentary'
-Plug 'sebdah/vim-delve'
+" Plug 'sebdah/vim-delve'
 Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 Plug 'ryanoasis/vim-devicons'
-
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
-" Plug 'tyrannicaltoucan/vim-deep-space'
-" Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
-filetype indent on    " Enable filetype-specific indenting
-filetype plugin on    " Enable filetype-specific plugins
-
-" Set extra options when running in GUI mode
-if has("gui_vimr")
-  set guioptions=
-  let g:gruvbox_italic=1
-endif
+" filetype indent on    " Enable filetype-specific indenting
+" filetype plugin on    " Enable filetype-specific plugins
 
 set background=dark
 set termguicolors
-let g:gruvbox_contrast_dark='hard'
 colorscheme gruvbox
 
 let mapleader="\<Space>"
 
 " gruvbox
-hi clear SignColumn
-hi vertsplit ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1d2021
-hi LineNr ctermfg=237 guifg=#3a3a3a
-hi StatusLine ctermfg=234 ctermbg=245 guifg=#1d2021 guibg=#8a8a8a
-hi StatusLineNC ctermfg=234 ctermbg=237 guifg=#1d2021 guibg=#3a3a3a
-hi Search ctermbg=58 ctermfg=15 guibg=#5f5f00
-hi Default ctermfg=1
-hi SignColumn ctermbg=234
-hi GitGutterAdd ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
-hi GitGutterChange ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
-hi GitGutterDelete ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
-hi GitGutterChangeDelete ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
-hi EndOfBuffer ctermfg=237 ctermbg=234 guifg=#3a3a3a guibg=#1d2021
+" hi clear SignColumn
+" hi vertsplit ctermfg=238 ctermbg=234 guifg=#444444 guibg=#1d2021
+" hi LineNr ctermfg=237 guifg=#3a3a3a
+" hi StatusLine ctermfg=234 ctermbg=245 guifg=#1d2021 guibg=#8a8a8a
+" hi StatusLineNC ctermfg=234 ctermbg=237 guifg=#1d2021 guibg=#3a3a3a
+" hi Search ctermbg=58 ctermfg=15 guibg=#5f5f00
+" hi Default ctermfg=1
+" hi SignColumn ctermbg=234
+" hi GitGutterAdd ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+" hi GitGutterChange ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+" hi GitGutterDelete ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+" hi GitGutterChangeDelete ctermbg=234 ctermfg=245 guibg=#1d2021 guifg=#8a8a8a
+" hi EndOfBuffer ctermfg=237 ctermbg=234 guifg=#3a3a3a guibg=#1d2021
 
 set number                          " show line numbers
 set lazyredraw                      " Don't redraw while executing macros (good performance config)
@@ -79,18 +69,11 @@ set nowritebackup
 set noswapfile
 set clipboard+=unnamedplus
 set encoding=UTF-8
-" set autowrite
-" set autoread
-" set complete-=i
-" set viminfo^=!
-" set backspace=indent,eol,start
-" set sessionoptions-=options
 
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2
 autocmd FileType vim setlocal sw=2 ts=2 sts=2
 autocmd FileType yaml setlocal sw=2 ts=2 sts=2
-
 
 inoremap fd <esc>
 
@@ -106,7 +89,6 @@ map <C-l> <C-W>l
 
 " select all
 map <Leader>a ggVG
-
 
 " Insert newline without entering insert mode
 nmap <S-Enter> O<Esc>
@@ -124,102 +106,21 @@ noremap <silent><Leader>/ :nohls<CR>
 nmap ,, gcc
 vmap ,, gc
 
-" vim-go
-let g:go_def_mapping_enabled = 0
-let g:go_fmt_command = "goimports"
-" let g:go_def_mode = "gopls"
-" let g:go_info_mode = "gopls"
-let g:go_list_type = "quickfix"
-" let g:go_auto_type_info = 1
-let g:go_fmt_autosave = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_methods = 1
-let g:go_highlight_structs = 1
-let g:go_highlight_operators = 1
-let g:go_highlight_fields = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_build_constraints = 1
-let g:go_highlight_extra_types = 1
-" let g:go_metalinter_enabled = ['golangci-lint']
-
-autocmd Filetype go command! -bang A call go#alternate#Switch(<bang>0, 'edit')
-autocmd Filetype go command! -bang AV call go#alternate#Switch(<bang>0, 'vsplit')
-autocmd Filetype go command! -bang AS call go#alternate#Switch(<bang>0, 'split')
-autocmd Filetype go command! -bang R :GoReferrers
-autocmd Filetype go command! -bang T :GoTest
-autocmd Filetype go command! -bang B :GoBuild
-autocmd Filetype go command! -bang D :GoDoc
-autocmd Filetype go command! -bang L :GoLint
-autocmd Filetype go command! -bang C :GoCallees
-
-" fzf.vim
-let $FZF_DEFAULT_COMMAND = 'fd --type f --hidden --follow --exclude .git'
-nnoremap <Leader>f :Files<CR>
-nnoremap <Leader>b :Buffers<CR>
-nnoremap <Leader>g :Rg<CR>
-
-autocmd! FileType fzf
-autocmd  FileType fzf set laststatus=0 noshowmode noruler
-  \| autocmd BufLeave <buffer> set laststatus=2 showmode ruler
-
-" preview window
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-
-" Likewise, Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-" quickfix plugin
-let g:qfenter_keymap = {}
-let g:qfenter_keymap.open = ['<CR>']
-let g:qfenter_keymap.vopen = ['<C-v>']
-let g:qfenter_keymap.hopen = ['<C-CR>', '<C-s>', '<C-x>']
-let g:qfenter_keymap.topen = ['<C-t>']
-" move the quickfix window to the bottom of the window layout
-autocmd FileType qf wincmd J
-
 nnoremap <C-g> :NERDTreeToggle %<CR>
 nnoremap <leader>nn :Explore<CR>
 
-" let g:SuperTabDefaultCompletionType = "<c-n>"
+let g:SuperTabDefaultCompletionType = "<c-n>"
 
-" use <tab> for trigger completion and navigate to the next complete item
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
+let g:lightline = {
+\ 'colorscheme': 'gruvbox',
+\ 'active': {
+\   'left': [ [ 'mode', 'paste' ],
+\             [ 'cocstatus', 'readonly', 'filename', 'modified' ] ]
+\ },
+\ 'component_function': {
+\   'cocstatus': 'coc#status'
+\ },
+\ }
 
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-
-" Remap keys for gotos
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-function! s:show_documentation()
-  if (index(['vim','help'], &filetype) >= 0)
-    execute 'h '.expand('<cword>')
-  else
-    call CocAction('doHover')
-  endif
-endfunction
-
-" Highlight symbol under cursor on CursorHold
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Remap for rename current word
-nmap <leader>rn <Plug>(coc-rename)
+execute 'source' fnameescape(expand('~/.config/nvim/config/coc.vim'))
+execute 'source' fnameescape(expand('~/.config/nvim/config/fzf.vim'))

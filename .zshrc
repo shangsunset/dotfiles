@@ -125,12 +125,14 @@ alias g=git
 export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
+export PATH="$PATH:$GOPATH/bin"
 
 # java
 alias java_versions='/usr/libexec/java_home -V'
 export JAVA_HOME="/Library/Java/JavaVirtualMachines/adoptopenjdk-8.jdk/Contents/Home"
 # export JAVA_HOME="/Library/Java/JavaVirtualMachines/openjdk-11.jdk/Contents/Home"
 export PATH="$PATH:$JAVA_HOME"
+
 
 # fzf
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
