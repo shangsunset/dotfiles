@@ -13,10 +13,6 @@
 !/.config/nvim
 !/.config/nvim/init.vim
 
-# fish
-!/.config/fish
-!/.config/fish/config.fish
-
 # vim
 !/.vimrc
 
@@ -27,3 +23,8 @@
 # tmux
 !/.tmux.conf
 !/.tmux.statusbar.conf
+
+# homebrew
+!/Brewfile
+
+!/setup.sh
