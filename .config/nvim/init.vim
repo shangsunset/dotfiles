@@ -69,6 +69,7 @@ set nowritebackup
 set noswapfile
 set clipboard+=unnamedplus
 set encoding=UTF-8
+set mmp=5000
 
 autocmd FileType make setlocal sw=2 ts=2 sts=2 noexpandtab
 autocmd FileType json setlocal sw=2 ts=2 sts=2

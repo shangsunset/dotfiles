@@ -117,12 +117,14 @@ alias g=git
 
 
 # export http_proxy=localhost:8001
+export PATH="/usr/local/sbin:$PATH"
+export PATH="/usr/local/bin:$PATH"
 
 # postgres
 # export PATH="/usr/local/bin/postgres/bin:$PATH"
 
 # go
-export GOROOT=/usr/local/opt/go/libexec
+# export GOROOT=/usr/local/opt/go/libexec
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOROOT/bin:$GOPATH/bin
 export PATH="$PATH:$GOPATH/bin"
@@ -157,6 +159,5 @@ if [ -f '/Users/yeshenshang/google-cloud-sdk/path.zsh.inc' ]; then . '/Users/yes
 
 # The next line enables shell command completion for gcloud.
 if [ -f '/Users/yeshenshang/google-cloud-sdk/completion.zsh.inc' ]; then . '/Users/yeshenshang/google-cloud-sdk/completion.zsh.inc'; fi
-
 
 source ~/.bouncex
